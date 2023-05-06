@@ -35,9 +35,6 @@ func (c *CBCEncrypter) CryptBlocks(dst, src []byte) {
 	if len(dst) < len(src) {
 		panic("crypto/cipher: output smaller than input")
 	}
-	if len(src) == 0 {
-		return
-	}
 	for len(src) > 0 {
 		for i := 0; i < bs; i++ {
 			c.work[i] = c.blk[i] ^ src[i]
@@ -68,9 +65,6 @@ func (c *CBCDecrypter) CryptBlocks(dst, src []byte) {
 	}
 	if len(dst) < len(src) {
 		panic("crypto/cipher: output smaller than input")
-	}
-	if len(src) == 0 {
-		return
 	}
 	for len(src) > 0 {
 		c.ecb.CryptBlocks(c.work, src[:bs])
